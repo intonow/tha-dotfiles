@@ -3,7 +3,7 @@ to be put in .config ($XDG_CONFIG_HOME) unless told otherwise
 
 
 
-## content took from other peopole's config and the plugins used :
+## content took from other people's config and the plugins used :
 
 ### mpv :
 - [mpvacious](https://github.com/Ajatt-Tools/mpvacious)
