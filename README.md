@@ -15,3 +15,11 @@ to be put in .config ($XDG_CONFIG_HOME) unless told otherwise
 ### i3 / sway
 - took [lropilla's config](https://github.com/lrorpilla/linuxrice) as a base, not for any specific reason tbh
 
+
+# Resources
+absolutely not related, but i will put useful resources here:
+
+- https://github.com/lrorpilla/jidoujisho
+- anki
+- anki droid
+- https://rentry.co/lazyXel
