@@ -1,7 +1,0 @@
-// this file is kind of messy but it doesn't matter for now
-
-
-
-cd ~/.config/mpv/scripts/subs2srs && git pull
-
-https://git.sr.ht/~guidocella/mpv-lrc
