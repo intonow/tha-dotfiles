@@ -16,3 +16,5 @@ to be put in .config ($XDG_CONFIG_HOME) unless told otherwise
 - https://rentry.co/lazyXel
 
 ## other
+- [git manual](https://git-scm.com/docs/user-manual.html)
+(to be honnest, the only command you'll need as a user is git pull to update)
