@@ -1,0 +1,6 @@
+
+
+
+# moving the storage devices to the home folder
+ln -s ~/Devices/file-hdd/ ~/
+mv file-hdd data
