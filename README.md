@@ -24,3 +24,7 @@ to be put in .config ($XDG_CONFIG_HOME) unless told otherwise
 ## other
 - [git manual](https://git-scm.com/docs/user-manual.html)
 (to be honnest, the only command you'll need as a user is ```git pull``` to update)
+
+# reproduce the full config with nix
+[test](/nix)
+the config in there should be reproducible with a nix kde install, as i don't know if the config install kde, but i don't think so
