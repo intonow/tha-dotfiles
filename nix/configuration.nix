@@ -7,13 +7,12 @@
   # sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
   # sudo nix-channel --update
 
-# this configuration aims a regular desktop use with kde
 
+
+# this configuration aims a regular desktop use with kde
 let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
 {
-  config = { allowUnfree = true; };
-
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -27,12 +26,18 @@ in
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # experimental features for ease of use
+  nix.settings.experimental-features = [ "nix-command" ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # Enables bluetooth ( unstable ? )
+  hardware.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -104,22 +109,23 @@ in
       # developpement & shell
       python310Packages.pip
       fish
-      # media consumption
+      # media consumption & editing
       unstable.mpv
-      unstable.anki
-      # media editing
+      unstable.anki-bin # anki is outdated -> use the flatpak if the version is not recent enough
+      unstable.obs-studio
       unstable.mkvtoolnix-cli
       kdenlive
       # IME
       fcitx5
       fcitx5-mozc
+      fcitx5-configtool
       # etc
       libreoffice
       keepassxc
       libsForQt5.ark
       gparted
       qbittorrent
-      libsForQt5.kpmcore
+      libsForQt5.kpmcore # required for partition-manager
       partition-manager
 
       # emulation and games
@@ -143,10 +149,22 @@ in
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    # others
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
 
+    # vpn
+    mullvad
+  ];
+
+  # fonts, copied from the nixos wiki
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
   ];
 
 
