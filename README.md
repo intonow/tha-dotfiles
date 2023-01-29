@@ -1,3 +1,6 @@
+[日本語で](readme.jp.md)
+
+
 # tha-dotfiles
 to be put in .config ($XDG_CONFIG_HOME) unless told otherwise
 
