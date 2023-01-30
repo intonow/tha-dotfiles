@@ -13,6 +13,7 @@
 let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
 {
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -27,7 +28,7 @@ in
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # experimental features for ease of use
-  nix.settings.experimental-features = [ "nix-command" ];
+  nix.settings.experimental-features = [ "nix-command flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -57,12 +58,18 @@ in
     LC_TIME = "ja_JP.UTF-8";
   };
 
-  # Enable the X11 windowing system.
+  # Enable the X11 windowing system. needed for sddm even if wayland is used
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
+  # exculde packages from the kde install
+  services.xserver.desktopManager.plasma5.excludePackages = with pkgs.libsForQt5; [
+  elisa
+  ];
+
 
   # Configure keymap in X11
   services.xserver = {
@@ -72,6 +79,32 @@ in
 
   # Configure console keymap
   console.keyMap = "dvorak";
+
+    # fonts, copied from the nixos wiki
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+  ];
+
+  # jp IME
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      # fcitx5-configtool
+      # libsForQt5.fcitx5-qt
+      # fcitx5-gtk
+      # fcitx5-lua
+    ];
+  };
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -106,8 +139,11 @@ in
       firefox
       kate
       thunderbird
+
       # developpement & shell
+      python311
       python310Packages.pip
+      lua5_4
       fish
       # media consumption & editing
       unstable.mpv
@@ -115,10 +151,8 @@ in
       unstable.obs-studio
       unstable.mkvtoolnix-cli
       kdenlive
-      # IME
-      fcitx5
-      fcitx5-mozc
-      fcitx5-configtool
+      mediainfo
+
       # etc
       libreoffice
       keepassxc
@@ -153,20 +187,6 @@ in
     # vpn
     mullvad
   ];
-
-  # fonts, copied from the nixos wiki
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
-  ];
-
 
 
   # Some programs need SUID wrappers, can be configured further or are
