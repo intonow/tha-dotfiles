@@ -10,4 +10,7 @@ see [the mpv manual](https://mpv.io/manual/master/#property-expansion) for more 
 - [lrc](https://git.sr.ht/~guidocella/mpv-lrc)
 - [mpris](https://github.com/hoyon/mpv-mpris)
 
+youtube dl is set to download english, japanese, french and spanish.
+please change it to your liking
+
 
